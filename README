@@ -44,8 +44,8 @@ into a single installer:
 CONTENT
 =======
 
-install.sh - installation script to modify RHEL 6.4+ ISO image
-stig-fix-kickstart.tar.gz - Kickstarts, Python, and RPMs needed to modify image.
+createiso.sh - installation script to modify RHEL 6.4+ ISO image
+/config - Kickstarts, Python, and RPMs needed to modify image.
 	isolinux/
 		grub.conf - Menu Configuration for Kickstart
 		isolinux.cfg - Menu Configuration for Kickstart
