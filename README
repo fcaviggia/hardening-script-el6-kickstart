@@ -1,0 +1,123 @@
+###############################################################################
+# STIG FIX DVD CREATOR
+#
+# This script was written by Frank Caviggia, Red Hat Consulting
+# Last update was 20 August 2014
+# This script is NOT SUPPORTED by Red Hat Global Support Services.
+# Please contact Rick Tavares for more information.
+#
+# Author: Frank Caviggia (fcaviggi@redhat.com)
+# Copyright: Red Hat, (c) 2013
+# Version: 1.2
+# License: GPLv2
+# Description: Kickstart Installation of RHEL 6 with DISA STIG 
+###############################################################################
+
+
+ABOUT
+=====
+
+Modifies a RHEL 6.4+ x86_64 Workstation or Server DVD with a kickstart
+that will install a system that is configured with the DISA STIG for
+Red Hat Enterprise Linux 6. 
+
+The kickstart script involves the integration of the following projects 
+into a single installer:
+
+   - stig-fix-1.7.8.el6.noarch.rpm (Hardening scripts from DISA STIG RPM scripts)
+   
+        https://github.com/RedHatGov/stig-fix-el6
+
+   - classification-banner.py (Python for displaying graphical classification banner)
+   
+        https://github.com/RedHatGov/classification-banner
+
+   - SCAP Security Guide (SSG) Content - Benchmark for the system after installation
+   
+        https://github.com/OpenSCAP/scap-security-guide
+
+   - DOD Firefox Plugin
+   
+        http://www.forge.mil/Resources-Firefox.html
+
+
+CONTENT
+=======
+
+install.sh - installation script to modify RHEL 6.4+ ISO image
+stig-fix-kickstart.tar.gz - Kickstarts, Python, and RPMs needed to modify image.
+	isolinux/
+		grub.conf - Menu Configuration for Kickstart
+		isolinux.cfg - Menu Configuration for Kickstart
+	stig-fix/
+		stig-fix.cfg
+		
+			Kickstart Configuration (Calls menu.py in %pre)
+		
+		menu.py
+		
+			Python Script that presents a graphical menu to modify the kickstart. 
+			Contains the "Profiles" for configuring the system partitioning and 
+			packages.
+
+		classification-banner.py
+		
+			Graphical Classification Banner (for GNOME Desktops paUser/Developer
+			Workstation Profiles)
+
+		dod_firefox_config.tar.gz
+
+			DOD Firefox Plugin and DOD Root CA Certificates for NIPR (SPIR
+			CAs would need to be added and repackaged via taring up the
+			.mozzilla directory - placed in /etc/skel for all users.
+
+		stig-fix-1.7.8-el6.noarch.rpm
+
+			RPM Created from my fork of Aqueduct here:
+
+				https://github.com/RedHatGov/stig-fix-el6
+
+			The hardening is run at the last part of the kickstart script to
+			lockdown the system, this could theoretically be replaced by the
+			SCAP Security Guide Scripts below at a later date.
+
+		scap-security-guide-0.1-17.el6.noarch.rpm
+
+			Currently I use ths SSG Scripts to take a benchmark to save in
+			root after installation.
+
+
+EXAMPLE
+=======
+
+# ./install.sh rhel-server-6.5-x86_64-dvd.iso 
+Mounting RHEL DVD Image...
+mount: /dev/loop0 is write-protected, mounting read-only
+Done.
+Copying RHEL DVD Image... Done.
+Modifying RHEL DVD Image... Done.
+Remastering RHEL DVD Image...
+I: -input-charset not specified, using utf-8 (detected in locale settings)
+Using RELEA000.HTM;1 for  /RELEASE-NOTES-ja-JP.html (RELEASE-NOTES-ta-IN.html)
+	<..........................................>
+Using POLIC003.RPM;1 for  ./Packages/policycoreutils-python-2.0.83-19.39.el6.x86_64.rpm (policycoreutils-newrole-2.0.83-19.39.el6.x86_64.rpm)
+Size of boot image is 4 sectors -> No emulation
+  0.27% done, estimate finish Tue Jan 21 22:04:41 2014
+	<...........................................>
+ 99.86% done, estimate finish Tue Jan 21 22:06:46 2014
+Total translation table size: 976326
+Total rockridge attributes bytes: 430528
+Total directory bytes: 661504
+Path table size(bytes): 286
+Max brk space used 3ee000
+1882600 extents written (3676 MB)
+Done.
+Signing RHEL DVD Image...
+Inserting md5sum into iso image...
+md5 = ec4618f4ccc6ccac3cfed291ef341012
+Inserting fragment md5sums into iso image...
+fragmd5 = e115ca49531d6adfee6caadeaf6a895cdc4c3e8b9341f58f5e11e9113a79
+frags = 20
+Setting supported flag to 0
+Done.
+DVD Created. [rhel-stig-fix.iso]
