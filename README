@@ -8,7 +8,7 @@
 #
 # Author: Frank Caviggia (fcaviggi@redhat.com)
 # Copyright: Red Hat, (c) 2013
-# Version: 1.2
+# Version: 1.3
 # License: GPLv2
 # Description: Kickstart Installation of RHEL 6 with DISA STIG 
 ###############################################################################
@@ -83,6 +83,8 @@ createiso.sh - installation script to modify RHEL 6.4+ ISO image
 
 		scap-security-guide-0.1-17.el6.noarch.rpm
 
+			WILL BE REMOVED WITH RHEL 6.6 (SSG will be part of baseline)
+			
 			Currently I use ths SSG Scripts to take a benchmark to save in
 			root after installation.
 
@@ -90,7 +92,7 @@ createiso.sh - installation script to modify RHEL 6.4+ ISO image
 EXAMPLE
 =======
 
-# ./install.sh rhel-server-6.5-x86_64-dvd.iso 
+# ./createiso.sh rhel-server-6.5-x86_64-dvd.iso 
 Mounting RHEL DVD Image...
 mount: /dev/loop0 is write-protected, mounting read-only
 Done.
