@@ -56,14 +56,14 @@ createiso.sh - installation script to modify RHEL 6.4+ ISO image
 		
 		menu.py
 		
-			Python Script that presents a graphical menu to modify the kickstart. 
-			Contains the "Profiles" for configuring the system partitioning and 
-			packages.
+			Python Script that presents a graphical menu to modify the
+			kickstart. Contains the "Profiles" for configuring the 
+			system partitioning and packages.
 
 		classification-banner.py
 		
-			Graphical Classification Banner (for GNOME Desktops paUser/Developer
-			Workstation Profiles)
+			Graphical Classification Banner (for GNOME Desktops User/
+			Developer Workstation Profiles)
 
 		dod_firefox_config.tar.gz
 
