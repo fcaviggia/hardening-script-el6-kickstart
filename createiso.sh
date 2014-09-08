@@ -96,7 +96,7 @@ echo " Done."
 
 echo "Remastering RHEL DVD Image..."
 cd $DIR/rhel-dvd
-chmod a+w isolinux/isolinux.bin
+chmod u+w isolinux/isolinux.bin
 find . -name TRANS.TBL -exec rm '{}' \; 
 /usr/bin/mkisofs -J -T -o $DIR/rhel-stig-fix.iso -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -R -m TRANS.TBL .
 cd $DIR
