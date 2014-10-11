@@ -115,9 +115,8 @@ class Display_Menu:
                 # Creates Information Message
                 self.label = gtk.Label('This DVD installs Red Hat Enterprise Linux 6 with configurations required by the DISA STIG.')
                 self.vbox.add(self.label)
-                self.label = gtk.Label('RHEL 6 (STIG Installer v.1.3)')
+                self.label = gtk.Label('RHEL 6 (STIG Installer v.1.4)')
                 self.vbox.add(self.label)
-
 
                 # Blank Label
                 self.label = gtk.Label("")
