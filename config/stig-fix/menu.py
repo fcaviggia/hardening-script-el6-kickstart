@@ -2,13 +2,13 @@
 # Graphical Kickstart Script
 #
 # This script was written by Frank Caviggia, Red Hat Consulting
-# Last update was 25 July 2014
+# Last update was 11 October 2014
 # This script is NOT SUPPORTED by Red Hat Global Support Services.
-# Please contact Josh Waldman for more information.
+# Please contact Rick Tavares for more information.
 #
 # Author: Frank Caviggia (fcaviggi@redhat.com)
-# Copyright: Red Hat, (C) 2013
-# Version: 1.3
+# Copyright: Red Hat, (C) 2014
+# Version: 1.4
 # License: GPLv2
 
 import os,sys,re,crypt,random
@@ -263,6 +263,20 @@ class Display_Menu:
 
                 self.vbox.add(self.disk_list)
 
+                # Disk Encryption (Ability to disable LUKS for self encrypting drives)
+                self.encrypt = gtk.HBox()
+
+		self.label = gtk.Label("                             ")
+                self.encrypt.pack_start(self.label, False, True, 0)
+
+
+		self.encrypt_disk = gtk.CheckButton('Encrypt Drives with LUKS')
+		self.encrypt_disk.set_active(True)
+		self.encrypt.pack_start(self.encrypt_disk, False, True, 0)
+
+		self.vbox.add(self.encrypt)
+
+
 		# Minimal Installation Warning
 		if self.disk_total < 8:
 			self.MessageBox(self.window,"<b>Recommended minimum of 8Gb disk space for a Minimal Install!</b>\n\n You have "+str(self.disk_total)+"Gb available.",gtk.MESSAGE_WARNING)
@@ -404,7 +418,7 @@ class Display_Menu:
 
 	# Shows Help for Main Install
         def show_help_main(self,args):
-		self.help_text = ("<b>Install Help</b>\n\n- All LVM partitions need to take less than or equal to 100% of the LVM Volume Group.\n\n- Pressing OK prompts for a password to encrypt Disk (LUKS) and Root password. GRUB is installed with a randomly generated password. Use the 'grubby' command to modify grub configuration and the 'grub-crypt' command to generate a new password for grub.\n\n- To access root remotely via ssh you need to create a user and add them to the wheel and sshusers groups.\n\n- Minimum password length is 14 characters, using a strong password is recommended.\n")
+		self.help_text = ("<b>Install Help</b>\n\n- All LVM partitions need to take less than or equal to 100% of the LVM Volume Group.\n\n- Pressing OK prompts for a password to encrypt Disk (LUKS), GRUB, and Root password.\n\n- The sshusers group controls remote access, wheel group is for root users, and isso group is for limited root with auditing permissions.\n\n- To access root remotely via ssh you need to create a user and add them to the wheel and sshusers groups.\n\n- Minimum password length is 14 characters, using a strong password is recommended.\n")
                 self.MessageBox(self.window,self.help_text,gtk.MESSAGE_INFO)
 
 
@@ -1088,12 +1102,15 @@ class Display_Menu:
 			f = open('/tmp/stig-fix','w')
 			f.write('network --device eth0 --bootproto dhcp --noipv6 --hostname '+self.hostname.get_text()+'\n')
 			f.write('rootpw --iscrypted '+str(self.password)+'\n')
-			f.write('bootloader --location=mbr --driveorder='+str(self.data["INSTALL_DRIVES"])+' --append="crashkernel=auto rhgb quiet audit=1" --password='+str(self.password)+'\n')
+			f.write('bootloader --location=mbr --driveorder='+str(self.data["INSTALL_DRIVES"])+' --append="crashkernel=auto rhgb quiet audit=1" --password='+str(self.a)+'\n')
 			if self.data["IGNORE_DRIVES"] != "":
 				f.write('ignoredisk --drives='+str(self.data["IGNORE_DRIVES"])+'\n')
 			f.write('zerombr\n')
 			f.write('clearpart --all --drives='+str(self.data["INSTALL_DRIVES"])+'\n')
-			f.write('part pv.01 --grow --size=200  --encrypted --cipher=\'aes-xts-plain64\' --passphrase='+str(self.passwd)+'\n')
+			if self.encrypt_disk.get_active() == True:
+				f.write('part pv.01 --grow --size=200 --encrypted --cipher=\'aes-xts-plain64\' --passphrase='+str(self.passwd)+'\n')
+			else:
+				f.write('part pv.01 --grow --size=200\n')
 			f.write('part /boot --fstype=ext4 --size=1024\n')
 			f.write('volgroup vg1 --pesize=4096 pv.01\n')
 			f.write('logvol / --fstype=ext4 --name=lv_root --vgname=vg1 --size=2048 --grow --percent='+str(self.root_partition.get_value_as_int())+'\n')
