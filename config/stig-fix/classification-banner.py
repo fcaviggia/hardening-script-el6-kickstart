@@ -1,8 +1,16 @@
 #!/usr/bin/python
 # Classification Banner
-# Author: Frank Caviggia <fcaviggia at gmail.com>
-# Copyright: Frank Caviggia, 2013
-# Version: 1.5
+#
+# This script was written by Frank Caviggia, Red Hat Consulting
+# Last update was 14 October 2014
+# This script is NOT SUPPORTED by Red Hat Global Support Services.
+# Please contact Rick Tavares for more information.
+#
+# Script: classification-banner.py
+# Description: Displays a Classification for an Xwindows session
+# Copyright: Red Hat Consulting, 2014
+# Author: Frank Caviggia <fcaviggi (at) redhat.com>
+# Version: 1.5.2
 # License: GPLv2
 
 import sys
@@ -14,16 +22,17 @@ try:
     import pygtk
     import gtk
 except:
-    print("Error: DISPLAY environment varible not set.")
+    print("Error: DISPLAY environment variable not set.")
     sys.exit(1)
 
-# Classifion Banner Class
+
+# Classification Banner Class
 class Classification_Banner:
     """Class to create and refresh the actual banner."""
 
     def __init__(self, message="UNCLASSIFIED", fgcolor="#000000",
-        bgcolor="#00CC00", face="liberation-sans", size="small",
-        weight="bold"):
+                 bgcolor="#00CC00", face="liberation-sans", size="small",
+                 weight="bold"):
         """Set up and display the main window
 
         Keyword arguments:
@@ -34,14 +43,14 @@ class Classification_Banner:
         size    -- Size of font to use for text
         weight  -- Bold or normal
         """
-    	# Dynamic Resolution Scaling
-    	self.monitor = gtk.gdk.Screen()
-	self.monitor.connect("size-changed", self.resize)
-	# Newer versions of pygtk have this method
-	try:
-		self.monitor.connect("monitors-changed", self.resize)
-	except:
-		pass
+        # Dynamic Resolution Scaling
+        self.monitor = gtk.gdk.Screen()
+        self.monitor.connect("size-changed", self.resize)
+        # Newer versions of pygtk have this method
+        try:
+            self.monitor.connect("monitors-changed", self.resize)
+        except:
+            pass
 
         # Create Main Window
         self.window = gtk.Window()
@@ -56,25 +65,25 @@ class Classification_Banner:
         self.window.set_keep_above(True)
         self.window.set_app_paintable(True)
         # Try Xrandr to determine primary monitor resolution
-    	try:
-                self.screen = os.popen("xrandr | grep *0 | awk '{ print $2$3$4 }'").readlines()[0]
+        try:
+            self.screen = os.popen("xrandr | grep '^\*0' | awk '{ print $2$3$4 }'").readlines()[0]
+            self.hres = self.screen.split('x')[0]
+            self.vres = self.screen.split('x')[1].split('+')[0]
+        except:
+            try:
+                self.screen = os.popen("xrandr | grep primary | awk '{ print $4 }'").readlines()[0]
                 self.hres = self.screen.split('x')[0]
                 self.vres = self.screen.split('x')[1].split('+')[0]
-	except:
-		try:
-	    		self.screen = os.popen("xrandr | grep primary | awk '{ print $4 }'").readlines()[0]
-	    		self.hres = self.screen.split('x')[0]
-	    		self.vres = self.screen.split('x')[1].split('+')[0]
-		except:
-			self.screen = os.popen("xrandr | grep connected | awk '{ print $3 }'").readlines()[0]
-			self.hres = self.screen.split('x')[0]
-			self.vres = self.screen.split('x')[1].split('+')[0]
-        	else:
-			# Failback to GTK method
-			self.display = gtk.gdk.display_get_default()
-			self.screen = self.display.get_default_screen()
-			self.hres = self.screen.get_width()
-			self.vres = self.screen.get_height()
+            except:
+                self.screen = os.popen("xrandr | grep connected | awk '{ print $3 }'").readlines()[0]
+                self.hres = self.screen.split('x')[0]
+                self.vres = self.screen.split('x')[1].split('+')[0]
+            else:
+                # Fail back to GTK method
+                self.display = gtk.gdk.display_get_default()
+                self.screen = self.display.get_default_screen()
+                self.hres = self.screen.get_width()
+                self.vres = self.screen.get_height()
         self.window.set_default_size(int(self.hres), 5)
 
         # Create Main Vertical Box to Populate
@@ -101,31 +110,32 @@ class Classification_Banner:
         self.window.destroy()
         return True
 
+
 class Display_Banner:
     """Display Classification Banner Message"""
 
     def __init__(self):
 
-    	# Dynamic Resolution Scaling
-    	self.monitor = gtk.gdk.Screen()
-	self.monitor.connect("size-changed", self.resize)
-	# Newer versions of pygtk have this method
-	try:
-		self.monitor.connect("monitors-changed", self.resize)
-	except:
-		pass
+        # Dynamic Resolution Scaling
+        self.monitor = gtk.gdk.Screen()
+        self.monitor.connect("size-changed", self.resize)
+        # Newer versions of pygtk have this method
+        try:
+            self.monitor.connect("monitors-changed", self.resize)
+        except:
+            pass
 
-	# Launch Banner
-	self.config, self.args = self.configure()
-	self.execute(self.config)
+        # Launch Banner
+        self.config, self.args = self.configure()
+        self.execute(self.config)
 
     # Read Global configuration
     def configure(self):
         config = {}
         try:
-        	execfile("/etc/classification-banner", config)
+            execfile("/etc/classification-banner", config)
         except:
-        	pass
+            pass
         defaults = {}
         defaults["message"] = config.get("message", "UNCLASSIFIED")
         defaults["fgcolor"] = config.get("fgcolor", "#000000")
@@ -139,24 +149,24 @@ class Display_Banner:
         # Use the global config to set defaults for command line options
         parser = optparse.OptionParser()
         parser.add_option("-m", "--message", default=defaults["message"],
-            help="Classification message")
+                          help="Classification message")
         parser.add_option("-f", "--fgcolor", default=defaults["fgcolor"],
-            help="Foreground (text) color")
+                          help="Foreground (text) color")
         parser.add_option("-b", "--bgcolor", default=defaults["bgcolor"],
-            help="Background color")
+                          help="Background color")
         parser.add_option("--face", default=defaults["face"], help="Font face")
         parser.add_option("--size", default=defaults["size"], help="Font size")
         parser.add_option("--weight", default=defaults["weight"],
-            help="Font weight")
+                          help="Font weight")
         parser.add_option("--hide-top", default=defaults["show_top"],
-            dest="show_top", action="store_false",
-            help="Disable the top banner")
+                          dest="show_top", action="store_false",
+                          help="Disable the top banner")
         parser.add_option("--hide-bottom", default=defaults["show_bottom"],
-            dest="show_bottom", action="store_false",
-            help="Disable the bottom banner")
+                          dest="show_bottom", action="store_false",
+                          help="Disable the bottom banner")
 
         options, args = parser.parse_args()
-	return options, args
+        return options, args
 
     # Launch the Classification Banner Window(s)
     def execute(self, options):
@@ -179,14 +189,14 @@ class Display_Banner:
                 options.weight)
             bottom.window.move(0, int(bottom.vres))
 
-    # Relauch the Classification Banner on Screen Resize
+    # Relaunch the Classification Banner on Screen Resize
     def resize(self, widget, data=None):
-	self.config, self.args = self.configure()
-	self.execute(self.config)
+        self.config, self.args = self.configure()
+        self.execute(self.config)
         return True
 
 
 # Main Program Loop
 if __name__ == "__main__":
-	run = Display_Banner()
-	gtk.main()
+    run = Display_Banner()
+    gtk.main()
