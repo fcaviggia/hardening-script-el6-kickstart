@@ -3,13 +3,13 @@
 # STIG FIX DVD CREATOR
 #
 # This script was written by Frank Caviggia, Red Hat Consulting
-# Last update was 21 January 2014
+# Last update was 14 October 2014
 # This script is NOT SUPPORTED by Red Hat Global Support Services.
 # Please contact Josh Waldman for more information.
 #
 # Author: Frank Caviggia (fcaviggi@redhat.com)
-# Copyright: Red Hat, (c) 2013
-# Version: 1.1.3
+# Copyright: Red Hat, (c) 2014
+# Version: 1.2
 # License: GPLv2
 # Description: Kickstart Installation of RHEL 6 with DISA STIG 
 ###############################################################################
@@ -92,6 +92,11 @@ fi
 
 echo -n "Modifying RHEL DVD Image..."
 cp -a $DIR/config/* $DIR/rhel-dvd/
+# RHEL 6.6 included the SCAP Security Guide (SSG) RPM
+if [[ $(grep "Red Hat" $DIR/rhel-dvd/.discinfo | awk '{ print $5 }' | awk -F '.' '{ print $2 }') -ge 6 ]]; then
+	rm -f $DIR/rhel-dvd/stig-fix/scap-security-guide*rpm
+	sed -i "s/xml-common/scap-security-guide\nxml-common/" $DIR/rhel-dvd/stig-fix/stig-fix.cfg
+fi
 echo " Done."
 
 echo "Remastering RHEL DVD Image..."
