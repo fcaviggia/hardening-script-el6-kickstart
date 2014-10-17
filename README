@@ -2,13 +2,12 @@
 # STIG FIX DVD CREATOR
 #
 # This script was written by Frank Caviggia, Red Hat Consulting
-# Last update was 20 August 2014
+# Last update was 17 October 2014
 # This script is NOT SUPPORTED by Red Hat Global Support Services.
 # Please contact Rick Tavares for more information.
 #
 # Author: Frank Caviggia (fcaviggi@redhat.com)
-# Copyright: Red Hat, (c) 2013
-# Version: 1.3
+# Copyright: Red Hat, (c) 2014
 # License: GPLv2
 # Description: Kickstart Installation of RHEL 6 with DISA STIG 
 ###############################################################################
@@ -24,7 +23,7 @@ Red Hat Enterprise Linux 6.
 The kickstart script involves the integration of the following projects 
 into a single installer:
 
-   - stig-fix-1.7.8.el6.noarch.rpm (Hardening scripts from DISA STIG RPM scripts)
+   - stig-fix-*.el6.noarch.rpm (Hardening scripts from DISA STIG RPM scripts)
    
         https://github.com/RedHatGov/stig-fix-el6
 
@@ -71,9 +70,9 @@ createiso.sh - installation script to modify RHEL 6.4+ ISO image
 			CAs would need to be added and repackaged via taring up the
 			.mozzilla directory - placed in /etc/skel for all users.
 
-		stig-fix-1.7.8-el6.noarch.rpm
+		stig-fix-*-el6.noarch.rpm
 
-			RPM Created from my fork of Aqueduct here:
+			RPM Created from my fork of Tresys CLIP, Aqueduct, NSA SNAC, and USGCB here:
 
 				https://github.com/RedHatGov/stig-fix-el6
 
@@ -81,7 +80,7 @@ createiso.sh - installation script to modify RHEL 6.4+ ISO image
 			lockdown the system, this could theoretically be replaced by the
 			SCAP Security Guide Scripts below at a later date.
 
-		scap-security-guide-0.1-17.el6.noarch.rpm
+		scap-security-guide-*.el6.noarch.rpm
 
 			WILL BE REMOVED WITH RHEL 6.6 (SSG will be part of baseline)
 			
