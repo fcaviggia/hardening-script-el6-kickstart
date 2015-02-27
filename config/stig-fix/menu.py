@@ -8,7 +8,6 @@
 #
 # Author: Frank Caviggia (fcaviggi@redhat.com)
 # Copyright: Red Hat, (C) 2014
-# Version: 1.4
 # License: GPLv2
 
 import os,sys,re,crypt,random
@@ -115,7 +114,7 @@ class Display_Menu:
                 # Creates Information Message
                 self.label = gtk.Label('This DVD installs Red Hat Enterprise Linux 6 with configurations required by the DISA STIG.')
                 self.vbox.add(self.label)
-                self.label = gtk.Label('RHEL 6 (STIG Installer v.1.4)')
+                self.label = gtk.Label('RHEL 6 (STIG Installer v.1.4.1)')
                 self.vbox.add(self.label)
 
                 # Blank Label
@@ -142,7 +141,8 @@ class Display_Menu:
 		self.system_profile.append_text("Minimal Installation")
 		self.system_profile.append_text("User Workstation")
 		self.system_profile.append_text("Developer Workstation")
-		self.system_profile.append_text("RHN Satellite Server")
+		self.system_profile.append_text("RHN Satellite 5.x Server")
+		self.system_profile.append_text("RHN Satellite 6.x Server")
 		self.system_profile.append_text("Proprietary Database Server")
 		self.system_profile.append_text("RHEV-Attached KVM Server")
 		#self.system_profile.append_text("Standalone KVM Server")
@@ -683,7 +683,7 @@ class Display_Menu:
 
 
 		################################################################################################################
-		# RHN Satellite Install
+		# RHN Satellite 5.x Install
 		################################################################################################################
 		if int(self.system_profile.get_active()) == 3:
 			# Partitioning
@@ -770,11 +770,132 @@ class Display_Menu:
 			f.write('ksh\n')
 			f.close()
 
+		################################################################################################################
+		# RHN Satellite 5.x Install
+		################################################################################################################
+		if int(self.system_profile.get_active()) == 3:
+			# Partitioning
+			if self.disk_total < 120:
+				self.MessageBox(self.window,"<b>Recommended minimum of 120Gb disk space for a RHN Satelite Server!</b>\n\n You have "+str(self.disk_total)+"Gb available.",gtk.MESSAGE_WARNING)
+			self.opt_partition.set_value(0)
+			self.www_partition.set_value(3)
+			self.swap_partition.set_value(1)
+			self.tmp_partition.set_value(2)
+			self.var_partition.set_value(80)
+			self.log_partition.set_value(3)
+			self.audit_partition.set_value(3)
+			self.home_partition.set_value(3)
+			self.root_partition.set_value(5)
+			# Post Configuration (nochroot)
+			f = open('/tmp/stig-fix-post-nochroot','w')
+			f.write('')
+			f.close()
+			# Post Configuration
+			f = open('/tmp/stig-fix-post','w')
+			# Run Hardening Script
+			f.write('/sbin/stig-fix -q &> /dev/null')
+			# RHN Satellite requires umask of 022 for installation
+			f.write('sed -i "/umask/ c\umask 022" /etc/profile\n')
+			f.close()
+			# Package Selection
+			f = open('/tmp/stig-fix-packages','w')
+			f.write('')
+			f.close()
 
+		################################################################################################################
+		# RHN Satellite 6.x Install
+		################################################################################################################
+		if int(self.system_profile.get_active()) == 4:
+			# Partitioning
+			if self.disk_total < 120:
+				self.MessageBox(self.window,"<b>Recommended minimum of 120Gb disk space for a RHN Satelite Server!</b>\n\n You have "+str(self.disk_total)+"Gb available.",gtk.MESSAGE_WARNING)
+			self.opt_partition.set_value(70)
+			self.www_partition.set_value(3)
+			self.swap_partition.set_value(1)
+			self.tmp_partition.set_value(2)
+			self.var_partition.set_value(10)
+			self.log_partition.set_value(3)
+			self.audit_partition.set_value(3)
+			self.home_partition.set_value(3)
+			self.root_partition.set_value(5)
+			# Post Configuration (nochroot)
+			f = open('/tmp/stig-fix-post-nochroot','w')
+			f.write('')
+			f.close()
+			# Post Configuration
+			f = open('/tmp/stig-fix-post','w')
+			# Run Hardening Script
+			f.write('/sbin/stig-fix -q &> /dev/null')
+			# RHN Satellite requires umask of 022 for installation
+			f.write('sed -i "/umask/ c\umask 022" /etc/profile\n')
+			f.close()
+			# Package Selection
+			f = open('/tmp/stig-fix-packages','w')
+			f.write('')
+			f.close()
+			
+			
+		################################################################################################################
+		# Proprietary Database
+		################################################################################################################
+		if int(self.system_profile.get_active()) == 5:
+			# Partitioning
+			if self.disk_total < 60:
+				self.MessageBox(self.window,"<b>Recommended minimum of 60Gb disk space for a Proprietary Database Server!</b>\n\n You have "+str(self.disk_total)+"Gb available.",gtk.MESSAGE_WARNING)
+			self.www_partition.set_value(0)
+			self.home_partition.set_value(5)
+			self.swap_partition.set_value(5)
+			self.var_partition.set_value(7)
+			self.log_partition.set_value(10)
+			self.audit_partition.set_value(10)
+			self.tmp_partition.set_value(15)
+			self.opt_partition.set_value(30)
+			self.root_partition.set_value(18)
+			# Post Configuration (nochroot)
+			f = open('/tmp/stig-fix-post-nochroot','w')
+			f.write('cp /mnt/source/stig-fix/classification-banner.py /mnt/sysimage/usr/local/bin/\n')
+			f.write('chmod a+rx /mnt/sysimage/usr/local/bin/classification-banner.py\n')
+			f.close()
+			# Post Configuration
+			f = open('/tmp/stig-fix-post','w')
+			# Run Hardening Script
+			f.write('/sbin/stig-fix -q &> /dev/null')
+			f.close()
+			# Package Selection
+			f = open('/tmp/stig-fix-packages','w')
+			f.write('xorg-x11-server-Xorg\n')
+			f.write('xorg-x11-xinit\n')
+			f.write('xterm\n')
+			f.write('twm\n')
+			f.write('liberation-*\n')
+			f.write('dejavu-*\n')
+			f.write('openmotif\n')
+			f.write('libXmu\n')
+			f.write('libXp\n')
+			f.write('openmotif22\n')
+			f.write('kernel-devel\n')
+			f.write('kernel-headers\n')
+			f.write('gcc\n')
+			f.write('gcc-c++\n')
+			f.write('libgcc\n')
+			f.write('autoconf\n')
+			f.write('make\n')
+			f.write('libstdc++\n')
+			f.write('compat-libstdc++\n')
+			f.write('libaio\n')
+			f.write('libaio-devel\n')
+			f.write('unixODBC\n')
+			f.write('unixODBC-devel\n')
+			f.write('sysstat\n')
+			f.write('ksh\n')
+			f.close()
+			
+			
+			
 		################################################################################################################
 		# RHEV-Attached KVM Server (HARDENING SCRIPT NOT RUN UNTIL AFTER CONNECTION TO RHEVM SERVER)
 		################################################################################################################
-		if int(self.system_profile.get_active()) == 5:
+		if int(self.system_profile.get_active()) == 6:
 			# WARNING - HARDENDING SCRIPT NOT RUN!
  			self.MessageBox(self.window,"<b>THIS PROFILE WILL NOT RUN THE HARDENING SCRIPT!</b>\n\nPlease run the system hardening script after system has been attached to the RHEV-M server using the following command:\n\n   # stig-fix",gtk.MESSAGE_WARNING)
 			# Partitioning
@@ -807,7 +928,7 @@ class Display_Menu:
 		################################################################################################################
 		# Standalone KVM Installation
 		################################################################################################################
-		if int(self.system_profile.get_active()) == 6:
+		if int(self.system_profile.get_active()) == 7:
 			# Partitioning
 			if self.disk_total < 60:
 				self.MessageBox(self.window,"<b>Recommended minimum 60Gb disk space for a RHEL/KVM Server!</b>\n\n You have "+str(self.disk_total)+"Gb available.",gtk.MESSAGE_WARNING)
@@ -847,7 +968,7 @@ class Display_Menu:
 		################################################################################################################
 		# Apache HTTP (Web Server)
 		################################################################################################################
-		if int(self.system_profile.get_active()) == 7:
+		if int(self.system_profile.get_active()) == 8:
 			# Partitioning
 			if self.disk_total < 10:
 				self.MessageBox(self.window,"<b>Recommended minimum of 10Gb disk space for a Web Server!</b>\n\n You have "+str(self.disk_total)+"Gb available.",gtk.MESSAGE_WARNING)
@@ -878,7 +999,7 @@ class Display_Menu:
 		################################################################################################################
 		# Apache Tomcat
 		################################################################################################################
-		if int(self.system_profile.get_active()) == 8:
+		if int(self.system_profile.get_active()) == 9:
 			# Partitioning
 			if self.disk_total < 10:
 				self.MessageBox(self.window,"<b>Recommended minimum of 10Gb disk space for an Apache Tomcat Web Server!</b>\n\n You have "+str(self.disk_total)+"Gb available.",gtk.MESSAGE_WARNING)
@@ -909,7 +1030,7 @@ class Display_Menu:
 		################################################################################################################
 		# PostgreSQL Database
 		################################################################################################################
-		if int(self.system_profile.get_active()) == 9:
+		if int(self.system_profile.get_active()) == 10:
 			# Partitioning
 			if self.disk_total < 16:
 				self.MessageBox(self.window,"<b>Recommended minimum of 16Gb disk space for a PostgreSQL Database Server!</b>\n\n You have "+str(self.disk_total)+"Gb available.",gtk.MESSAGE_WARNING)
@@ -940,7 +1061,7 @@ class Display_Menu:
 		################################################################################################################
 		# MySQL Database
 		################################################################################################################
-		if int(self.system_profile.get_active()) == 10:
+		if int(self.system_profile.get_active()) == 11:
 			# Partitioning
 			if self.disk_total < 16:
 				self.MessageBox(self.window,"<b>Recommended minimum of 16Gb disk space for a MariaDB Database Server!</b>\n\n You have "+str(self.disk_total)+"Gb available.",gtk.MESSAGE_WARNING)
