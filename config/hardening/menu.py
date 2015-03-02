@@ -81,7 +81,7 @@ class Display_Menu:
 
                 # Create Main Window
                 self.window = gtk.Window()
-                self.window.set_title("Red Hat Enterprise Linux - DISA STIG Installation")
+                self.window.set_title("Red Hat Enterprise Linux - Hardened Installation")
                 self.window.set_position(gtk.WIN_POS_CENTER)
 		self.window.connect("delete_event",gtk.main_quit)
 		self.display = gtk.gdk.display_get_default()
@@ -106,15 +106,15 @@ class Display_Menu:
 
                 # Creates Header
                 self.header = gtk.HBox()
-                self.label = gtk.Label("<span font_family='liberation-sans' weight='bold' foreground='red' size='large'>  Red Hat Enterprise Linux - DISA STIG Installation  </span>")
+                self.label = gtk.Label("<span font_family='liberation-sans' weight='bold' foreground='red' size='large'>  Red Hat Enterprise Linux - Hardened Installation  </span>")
                 self.label.set_use_markup(True)
                 self.header.add(self.label)
                 self.vbox.add(self.header)
 
                 # Creates Information Message
-                self.label = gtk.Label('This DVD installs Red Hat Enterprise Linux 6 with configurations required by the DISA STIG.')
+                self.label = gtk.Label('This DVD installs Red Hat Enterprise Linux 6 with configurations required by multiple government regulations.')
                 self.vbox.add(self.label)
-                self.label = gtk.Label('RHEL 6 (STIG Installer v.1.4.1)')
+                self.label = gtk.Label('RHEL 6 (Hardened DVD Installer v.1.4.1)')
                 self.vbox.add(self.label)
 
                 # Blank Label
