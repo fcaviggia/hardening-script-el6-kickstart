@@ -66,10 +66,10 @@ class Display_Menu:
         def __init__(self):
 
 		# Initalize Additional Configuration Files
-		f = open('/tmp/stig-fix-post','w')
+		f = open('/tmp/hardening-post','w')
 		f.write('')
 		f.close()
-		f = open('/tmp/stig-fix-packages','w')
+		f = open('/tmp/hardening-packages','w')
 		f.write('')
 		f.close()
 
@@ -393,16 +393,16 @@ class Display_Menu:
 
 		## STOCK CONFIGURATIONS (Minimal Install)
 		# Post Configuration (nochroot)
-		f = open('/tmp/stig-fix-post-nochroot','w')
+		f = open('/tmp/hardening-post-nochroot','w')
 		f.write('')
 		f.close()
 		# Post Configuration
-		f = open('/tmp/stig-fix-post','w')
+		f = open('/tmp/hardening-post','w')
 		# Run Hardening Script
-		f.write('/sbin/stig-fix -q &> /dev/null')
+		f.write('/sbin/system-hardening -q &> /dev/null')
 		f.close()
 		# Package Selection
-		f = open('/tmp/stig-fix-packages','w')
+		f = open('/tmp/hardening-packages','w')
 		f.write('')
 		f.close()
 
@@ -451,16 +451,16 @@ class Display_Menu:
 			self.home_partition.set_value(25)
 			self.root_partition.set_value(30)
 			# Post Configuration (nochroot)
-			f = open('/tmp/stig-fix-post-nochroot','w')
+			f = open('/tmp/hardening-post-nochroot','w')
 			f.write('')
 			f.close()
 			# Post Configuration
-			f = open('/tmp/stig-fix-post','w')
+			f = open('/tmp/hardening-post','w')
 			# Run Hardening Script
-			f.write('/sbin/stig-fix -q &> /dev/null')
+			f.write('/sbin/system-hardening -q &> /dev/null')
 			f.close()
 			# Package Selection
-			f = open('/tmp/stig-fix-packages','w')
+			f = open('/tmp/hardening-packages','w')
 			f.write('')
 			f.close()
 
@@ -481,17 +481,17 @@ class Display_Menu:
 			self.home_partition.set_value(25)
 			self.root_partition.set_value(30)
 			# Post Configuration (nochroot)
-			f = open('/tmp/stig-fix-post-nochroot','w')
-			f.write('cp /mnt/source/stig-fix/classification-banner.py /mnt/sysimage/usr/local/bin/\n')
+			f = open('/tmp/hardening-post-nochroot','w')
+			f.write('cp /mnt/source/hardening/classification-banner.py /mnt/sysimage/usr/local/bin/\n')
 			f.write('chmod a+rx /mnt/sysimage/usr/local/bin/classification-banner.py\n')
 			f.close()
 			# Post Configuration
-			f = open('/tmp/stig-fix-post','w')
+			f = open('/tmp/hardening-post','w')
 			# Run Hardening Script
-			f.write('/sbin/stig-fix -q &> /dev/null')
+			f.write('/sbin/system-hardening -q &> /dev/null')
 			f.close()
 			# Package Selection
-			f = open('/tmp/stig-fix-packages','w')
+			f = open('/tmp/hardening-packages','w')
 			f.write('@additional-devel\n')
 			f.write('@basic-desktop\n')
 			f.write('@desktop-platform\n')
@@ -576,17 +576,17 @@ class Display_Menu:
 			self.home_partition.set_value(25)
 			self.root_partition.set_value(30)
 			# Post Configuration (nochroot)
-			f = open('/tmp/stig-fix-post-nochroot','w')
-			f.write('cp /mnt/source/stig-fix/classification-banner.py /mnt/sysimage/usr/local/bin/\n')
+			f = open('/tmp/hardening-post-nochroot','w')
+			f.write('cp /mnt/source/hardening/classification-banner.py /mnt/sysimage/usr/local/bin/\n')
 			f.write('chmod a+rx /mnt/sysimage/usr/local/bin/classification-banner.py\n')
 			f.close()
 			# Post Configuration
-			f = open('/tmp/stig-fix-post','w')
+			f = open('/tmp/hardening-post','w')
 			# Run Hardening Script
-			f.write('/sbin/stig-fix -q &> /dev/null')
+			f.write('/sbin/system-hardening -q &> /dev/null')
 			f.close()
 			# Package Selection
-			f = open('/tmp/stig-fix-packages','w')
+			f = open('/tmp/hardening-packages','w')
 			f.write('@additional-devel\n')
 			f.write('@basic-desktop\n')
 			f.write('@desktop-platform\n')
@@ -699,18 +699,18 @@ class Display_Menu:
 			self.home_partition.set_value(3)
 			self.root_partition.set_value(5)
 			# Post Configuration (nochroot)
-			f = open('/tmp/stig-fix-post-nochroot','w')
+			f = open('/tmp/hardening-post-nochroot','w')
 			f.write('')
 			f.close()
 			# Post Configuration
-			f = open('/tmp/stig-fix-post','w')
+			f = open('/tmp/hardening-post','w')
 			# Run Hardening Script
-			f.write('/sbin/stig-fix -q &> /dev/null')
+			f.write('/sbin/system-hardening -q &> /dev/null')
 			# RHN Satellite requires umask of 022 for installation
 			f.write('sed -i "/umask/ c\umask 022" /etc/profile\n')
 			f.close()
 			# Package Selection
-			f = open('/tmp/stig-fix-packages','w')
+			f = open('/tmp/hardening-packages','w')
 			f.write('')
 			f.close()
 
@@ -732,17 +732,17 @@ class Display_Menu:
 			self.opt_partition.set_value(30)
 			self.root_partition.set_value(18)
 			# Post Configuration (nochroot)
-			f = open('/tmp/stig-fix-post-nochroot','w')
-			f.write('cp /mnt/source/stig-fix/classification-banner.py /mnt/sysimage/usr/local/bin/\n')
+			f = open('/tmp/hardening-post-nochroot','w')
+			f.write('cp /mnt/source/hardening/classification-banner.py /mnt/sysimage/usr/local/bin/\n')
 			f.write('chmod a+rx /mnt/sysimage/usr/local/bin/classification-banner.py\n')
 			f.close()
 			# Post Configuration
-			f = open('/tmp/stig-fix-post','w')
+			f = open('/tmp/hardening-post','w')
 			# Run Hardening Script
-			f.write('/sbin/stig-fix -q &> /dev/null')
+			f.write('/sbin/system-hardening -q &> /dev/null')
 			f.close()
 			# Package Selection
-			f = open('/tmp/stig-fix-packages','w')
+			f = open('/tmp/hardening-packages','w')
 			f.write('xorg-x11-server-Xorg\n')
 			f.write('xorg-x11-xinit\n')
 			f.write('xterm\n')
@@ -787,18 +787,18 @@ class Display_Menu:
 			self.home_partition.set_value(3)
 			self.root_partition.set_value(5)
 			# Post Configuration (nochroot)
-			f = open('/tmp/stig-fix-post-nochroot','w')
+			f = open('/tmp/hardening-post-nochroot','w')
 			f.write('')
 			f.close()
 			# Post Configuration
-			f = open('/tmp/stig-fix-post','w')
+			f = open('/tmp/hardening-post','w')
 			# Run Hardening Script
-			f.write('/sbin/stig-fix -q &> /dev/null')
+			f.write('/sbin/system-hardening -q &> /dev/null')
 			# RHN Satellite requires umask of 022 for installation
 			f.write('sed -i "/umask/ c\umask 022" /etc/profile\n')
 			f.close()
 			# Package Selection
-			f = open('/tmp/stig-fix-packages','w')
+			f = open('/tmp/hardening-packages','w')
 			f.write('')
 			f.close()
 
@@ -819,18 +819,18 @@ class Display_Menu:
 			self.home_partition.set_value(3)
 			self.root_partition.set_value(5)
 			# Post Configuration (nochroot)
-			f = open('/tmp/stig-fix-post-nochroot','w')
+			f = open('/tmp/hardening-post-nochroot','w')
 			f.write('')
 			f.close()
 			# Post Configuration
-			f = open('/tmp/stig-fix-post','w')
+			f = open('/tmp/hardening-post','w')
 			# Run Hardening Script
-			f.write('/sbin/stig-fix -q &> /dev/null')
+			f.write('/sbin/system-hardening -q &> /dev/null')
 			# RHN Satellite requires umask of 022 for installation
 			f.write('sed -i "/umask/ c\umask 022" /etc/profile\n')
 			f.close()
 			# Package Selection
-			f = open('/tmp/stig-fix-packages','w')
+			f = open('/tmp/hardening-packages','w')
 			f.write('')
 			f.close()
 			
@@ -852,17 +852,17 @@ class Display_Menu:
 			self.opt_partition.set_value(30)
 			self.root_partition.set_value(18)
 			# Post Configuration (nochroot)
-			f = open('/tmp/stig-fix-post-nochroot','w')
-			f.write('cp /mnt/source/stig-fix/classification-banner.py /mnt/sysimage/usr/local/bin/\n')
+			f = open('/tmp/hardening-post-nochroot','w')
+			f.write('cp /mnt/source/hardening/classification-banner.py /mnt/sysimage/usr/local/bin/\n')
 			f.write('chmod a+rx /mnt/sysimage/usr/local/bin/classification-banner.py\n')
 			f.close()
 			# Post Configuration
-			f = open('/tmp/stig-fix-post','w')
+			f = open('/tmp/hardening-post','w')
 			# Run Hardening Script
-			f.write('/sbin/stig-fix -q &> /dev/null')
+			f.write('/sbin/system-hardening -q &> /dev/null')
 			f.close()
 			# Package Selection
-			f = open('/tmp/stig-fix-packages','w')
+			f = open('/tmp/hardening-packages','w')
 			f.write('xorg-x11-server-Xorg\n')
 			f.write('xorg-x11-xinit\n')
 			f.write('xterm\n')
@@ -897,7 +897,7 @@ class Display_Menu:
 		################################################################################################################
 		if int(self.system_profile.get_active()) == 6:
 			# WARNING - HARDENDING SCRIPT NOT RUN!
- 			self.MessageBox(self.window,"<b>THIS PROFILE WILL NOT RUN THE HARDENING SCRIPT!</b>\n\nPlease run the system hardening script after system has been attached to the RHEV-M server using the following command:\n\n   # stig-fix",gtk.MESSAGE_WARNING)
+ 			self.MessageBox(self.window,"<b>THIS PROFILE WILL NOT RUN THE HARDENING SCRIPT!</b>\n\nPlease run the system hardening script after system has been attached to the RHEV-M server using the following command:\n\n   # hardening",gtk.MESSAGE_WARNING)
 			# Partitioning
 			if self.disk_total < 60:
 				self.MessageBox(self.window,"<b>Recommended minimum of 60Gb disk space for a RHEV-Attached KVM Server Install!</b>\n\n You have "+str(self.disk_total)+"Gb available.",gtk.MESSAGE_WARNING)
@@ -911,16 +911,16 @@ class Display_Menu:
 			self.home_partition.set_value(25)
 			self.root_partition.set_value(30)
 			# Post Configuration (nochroot)
-			f = open('/tmp/stig-fix-post-nochroot','w')
+			f = open('/tmp/hardening-post-nochroot','w')
 			f.write('')
 			f.close()
 			# Post Configuration
-			f = open('/tmp/stig-fix-post','w')
+			f = open('/tmp/hardening-post','w')
 			# Allow 'root' to login via SSH - Required by RHEV-M
 			f.write('sed -i "/^PermitRootLogin/ c\PermitRootLogin yes" /etc/ssh/sshd_config')
 			f.close()
 			# Package Selection
-			f = open('/tmp/stig-fix-packages','w')
+			f = open('/tmp/hardening-packages','w')
 			f.write('')
 			f.close()
 
@@ -942,16 +942,16 @@ class Display_Menu:
 			self.home_partition.set_value(5)
 			self.root_partition.set_value(15)
 			# Post Configuration (nochroot)
-			f = open('/tmp/stig-fix-post-nochroot','w')
+			f = open('/tmp/hardening-post-nochroot','w')
 			f.write('')
 			f.close()
 			# Post Configuration
-			f = open('/tmp/stig-fix-post','w')
+			f = open('/tmp/hardening-post','w')
 			# Run Hardening Script
-			f.write('/sbin/stig-fix -q &> /dev/null')
+			f.write('/sbin/system-hardening -q &> /dev/null')
 			f.close()
 			# Package Selection
-			f = open('/tmp/stig-fix-packages','w')
+			f = open('/tmp/hardening-packages','w')
 			f.write('@storage-client-iscsi\n')
 			f.write('@virtualization\n')
 			f.write('@virtualization-client\n')
@@ -982,16 +982,16 @@ class Display_Menu:
 			self.home_partition.set_value(25)
 			self.root_partition.set_value(30)
 			# Post Configuration (nochroot)
-			f = open('/tmp/stig-fix-post-nochroot','w')
+			f = open('/tmp/hardening-post-nochroot','w')
 			f.write('')
 			f.close()
 			# Post Configuration
-			f = open('/tmp/stig-fix-post','w')
+			f = open('/tmp/hardening-post','w')
 			# Run Hardening Script
-			f.write('/sbin/stig-fix -q &> /dev/null')
+			f.write('/sbin/system-hardening -q &> /dev/null')
 			f.close()
 			# Package Selection
-			f = open('/tmp/stig-fix-packages','w')
+			f = open('/tmp/hardening-packages','w')
 			f.write('httpd\n')
 			f.close()
 
@@ -1013,16 +1013,16 @@ class Display_Menu:
 			self.home_partition.set_value(25)
 			self.root_partition.set_value(30)
 			# Post Configuration (nochroot)
-			f = open('/tmp/stig-fix-post-nochroot','w')
+			f = open('/tmp/hardening-post-nochroot','w')
 			f.write('')
 			f.close()
 			# Post Configuration
-			f = open('/tmp/stig-fix-post','w')
+			f = open('/tmp/hardening-post','w')
 			# Run Hardening Script
-			f.write('/sbin/stig-fix -q &> /dev/null')
+			f.write('/sbin/system-hardening -q &> /dev/null')
 			f.close()
 			# Package Selection
-			f = open('/tmp/stig-fix-packages','w')
+			f = open('/tmp/hardening-packages','w')
 			f.write('tomcat6\n')
 			f.close()
 
@@ -1044,16 +1044,16 @@ class Display_Menu:
 			self.home_partition.set_value(25)
 			self.root_partition.set_value(30)
 			# Post Configuration (nochroot)
-			f = open('/tmp/stig-fix-post-nochroot','w')
+			f = open('/tmp/hardening-post-nochroot','w')
 			f.write('')
 			f.close()
 			# Post Configuration
-			f = open('/tmp/stig-fix-post','w')
+			f = open('/tmp/hardening-post','w')
 			# Run Hardening Script
-			f.write('/sbin/stig-fix -q &> /dev/null')
+			f.write('/sbin/system-hardening -q &> /dev/null')
 			f.close()
 			# Package Selection
-			f = open('/tmp/stig-fix-packages','w')
+			f = open('/tmp/hardening-packages','w')
 			f.write('postgresql\n')
 			f.close()
 
@@ -1075,16 +1075,16 @@ class Display_Menu:
 			self.home_partition.set_value(25)
 			self.root_partition.set_value(30)
 			# Post Configuration (nochroot)
-			f = open('/tmp/stig-fix-post-nochroot','w')
+			f = open('/tmp/hardening-post-nochroot','w')
 			f.write('')
 			f.close()
 			# Post Configuration
-			f = open('/tmp/stig-fix-post','w')
+			f = open('/tmp/hardening-post','w')
 			# Run Hardening Script
-			f.write('/sbin/stig-fix -q &> /dev/null')
+			f.write('/sbin/system-hardening -q &> /dev/null')
 			f.close()
 			# Package Selection
-			f = open('/tmp/stig-fix-packages','w')
+			f = open('/tmp/hardening-packages','w')
 			f.write('mysql-server\n')
 			f.close()
 
@@ -1219,7 +1219,7 @@ class Display_Menu:
 				f.close()
 
 			# Write Kickstart Configuration
-			f = open('/tmp/stig-fix','w')
+			f = open('/tmp/hardening','w')
 			f.write('network --device eth0 --bootproto dhcp --noipv6 --hostname '+self.hostname.get_text()+'\n')
 			f.write('rootpw --iscrypted '+str(self.password)+'\n')
 			f.write('bootloader --location=mbr --driveorder='+str(self.data["INSTALL_DRIVES"])+' --append="crashkernel=auto rhgb quiet audit=1" --password='+str(self.a)+'\n')

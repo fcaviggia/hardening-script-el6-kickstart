@@ -94,8 +94,8 @@ echo -n "Modifying RHEL DVD Image..."
 cp -a $DIR/config/* $DIR/rhel-dvd/
 # RHEL 6.6 included the SCAP Security Guide (SSG) RPM
 if [[ $(grep "Red Hat" $DIR/rhel-dvd/.discinfo | awk '{ print $5 }' | awk -F '.' '{ print $2 }') -ge 6 ]]; then
-	rm -f $DIR/rhel-dvd/stig-fix/scap-security-guide*rpm
-	sed -i "s/xml-common/scap-security-guide\nxml-common/" $DIR/rhel-dvd/stig-fix/stig-fix.cfg
+	rm -f $DIR/rhel-dvd/hardening/scap-security-guide*rpm
+	sed -i "s/xml-common/scap-security-guide\nxml-common/" $DIR/rhel-dvd/hardening/hardened-rhel.cfg
 fi
 echo " Done."
 
