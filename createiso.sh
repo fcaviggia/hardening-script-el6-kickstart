@@ -1,6 +1,6 @@
 #!/bin/sh
 ###############################################################################
-# STIG FIX DVD CREATOR
+# HARDENED RHEL DVD CREATOR
 #
 # This script was written by Frank Caviggia, Red Hat Consulting
 # Last update was 14 October 2014
@@ -22,12 +22,12 @@ function usage() {
 cat << EOF
 usage: $0 rhel-server-6.5-x86_64-dvd.iso
 
-DISA STIG Installer Kickstart RHEL 6.4+
+Hardened RHEL Kickstart RHEL 6.4+
 
 Customizes a RHEL 6.4+ x86_64 Server or Workstation DVD to install
 with the following hardening:
 
-  - DISA STIG for Red Hat Enterprise Linux
+  - DISA STIG/USGCB/NSA SNAC for Red Hat Enterprise Linux
   - DISA STIG for Firefox (User/Developer Workstation)
   - Classification Banner (Graphical Desktop)
 
@@ -103,15 +103,15 @@ echo "Remastering RHEL DVD Image..."
 cd $DIR/rhel-dvd
 chmod u+w isolinux/isolinux.bin
 find . -name TRANS.TBL -exec rm '{}' \; 
-/usr/bin/mkisofs -J -T -o $DIR/rhel-stig-fix.iso -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -R -m TRANS.TBL .
+/usr/bin/mkisofs -J -T -o $DIR/hardened-rhel.iso -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -R -m TRANS.TBL .
 cd $DIR
 rm -rf $DIR/rhel-dvd
 echo "Done."
 
 echo "Signing RHEL DVD Image..."
-/usr/bin/implantisomd5 $DIR/rhel-stig-fix.iso
+/usr/bin/implantisomd5 $DIR/hardened-rhel.iso
 echo "Done."
 
-echo "DVD Created. [rhel-stig-fix.iso]"
+echo "DVD Created. [hardend-rhel.iso]"
 
 exit 0
