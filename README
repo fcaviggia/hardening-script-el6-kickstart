@@ -2,7 +2,7 @@
 # HARDENED DVD CREATOR
 #
 # This script was written by Frank Caviggia, Red Hat Consulting
-# Last update was 17 October 2014
+# Last update was 2 March 2015
 # This script is NOT SUPPORTED by Red Hat Global Support Services.
 # Please contact Rick Tavares for more information.
 #
@@ -25,7 +25,7 @@ into a single installer:
 
    - hardening-script-*.el6.noarch.rpm (Hardening scripts RPM)
    
-        https://github.com/fcaviggia/hardening-scripts-el6
+        https://github.com/fcaviggia/hardening-script-el6
 
    - classification-banner.py (Python for displaying graphical classification banner)
    
@@ -70,11 +70,11 @@ createiso.sh - installation script to modify RHEL 6.4+ ISO image
 			CAs would need to be added and repackaged via taring up the
 			.mozzilla directory - placed in /etc/skel for all users.
 
-		hardening-scripts-*-el6.noarch.rpm
+		hardening-script-*-el6.noarch.rpm
 
 			RPM Created from my fork of Tresys CLIP, Aqueduct, NSA SNAC, and USGCB here:
 
-				https://github.com/fcaviggia/hardening-scripts-el6
+				https://github.com/fcaviggia/hardening-script-el6
 
 			The hardening is run at the last part of the kickstart script to
 			lockdown the system, this could theoretically be replaced by the
