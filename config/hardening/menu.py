@@ -831,7 +831,9 @@ class Display_Menu:
 			f.close()
 			# Package Selection
 			f = open('/tmp/hardening-packages','w')
-			f.write('')
+			f.write('libyaml\n')
+			f.write('tomcat6\n')
+			f.write('java-1.6.0-openjdk\n')
 			f.close()
 			
 			
