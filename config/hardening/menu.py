@@ -399,7 +399,7 @@ class Display_Menu:
 		# Post Configuration
 		f = open('/tmp/hardening-post','w')
 		# Run Hardening Script
-		f.write('/sbin/system-hardening -q &> /dev/null')
+		f.write('/sbin/system-hardening -q &> /dev/null\n')
 		f.close()
 		# Package Selection
 		f = open('/tmp/hardening-packages','w')
@@ -457,7 +457,7 @@ class Display_Menu:
 			# Post Configuration
 			f = open('/tmp/hardening-post','w')
 			# Run Hardening Script
-			f.write('/sbin/system-hardening -q &> /dev/null')
+			f.write('/sbin/system-hardening -q &> /dev/null\n')
 			f.close()
 			# Package Selection
 			f = open('/tmp/hardening-packages','w')
@@ -488,7 +488,7 @@ class Display_Menu:
 			# Post Configuration
 			f = open('/tmp/hardening-post','w')
 			# Run Hardening Script
-			f.write('/sbin/system-hardening -q &> /dev/null')
+			f.write('/sbin/system-hardening -q &> /dev/null\n')
 			f.close()
 			# Package Selection
 			f = open('/tmp/hardening-packages','w')
@@ -583,7 +583,7 @@ class Display_Menu:
 			# Post Configuration
 			f = open('/tmp/hardening-post','w')
 			# Run Hardening Script
-			f.write('/sbin/system-hardening -q &> /dev/null')
+			f.write('/sbin/system-hardening -q &> /dev/null \n')
 			f.close()
 			# Package Selection
 			f = open('/tmp/hardening-packages','w')
@@ -705,7 +705,7 @@ class Display_Menu:
 			# Post Configuration
 			f = open('/tmp/hardening-post','w')
 			# Run Hardening Script
-			f.write('/sbin/system-hardening -q &> /dev/null')
+			f.write('/sbin/system-hardening -q &> /dev/null\n')
 			# RHN Satellite requires umask of 022 for installation
 			f.write('sed -i "/umask/ c\umask 022" /etc/profile\n')
 			f.close()
@@ -739,7 +739,7 @@ class Display_Menu:
 			# Post Configuration
 			f = open('/tmp/hardening-post','w')
 			# Run Hardening Script
-			f.write('/sbin/system-hardening -q &> /dev/null')
+			f.write('/sbin/system-hardening -q &> /dev/null \n')
 			f.close()
 			# Package Selection
 			f = open('/tmp/hardening-packages','w')
@@ -793,7 +793,7 @@ class Display_Menu:
 			# Post Configuration
 			f = open('/tmp/hardening-post','w')
 			# Run Hardening Script
-			f.write('/sbin/system-hardening -q &> /dev/null')
+			f.write('/sbin/system-hardening -q &> /dev/null\n')
 			# RHN Satellite requires umask of 022 for installation
 			f.write('sed -i "/umask/ c\umask 022" /etc/profile\n')
 			f.close()
@@ -825,7 +825,7 @@ class Display_Menu:
 			# Post Configuration
 			f = open('/tmp/hardening-post','w')
 			# Run Hardening Script
-			f.write('/sbin/system-hardening -q &> /dev/null')
+			f.write('/sbin/system-hardening -q &> /dev/null\n')
 			# RHN Satellite requires umask of 022 for installation
 			f.write('sed -i "/umask/ c\umask 022" /etc/profile\n')
 			f.close()
@@ -859,7 +859,7 @@ class Display_Menu:
 			# Post Configuration
 			f = open('/tmp/hardening-post','w')
 			# Run Hardening Script
-			f.write('/sbin/system-hardening -q &> /dev/null')
+			f.write('/sbin/system-hardening -q &> /dev/null\n')
 			f.close()
 			# Package Selection
 			f = open('/tmp/hardening-packages','w')
@@ -948,7 +948,7 @@ class Display_Menu:
 			# Post Configuration
 			f = open('/tmp/hardening-post','w')
 			# Run Hardening Script
-			f.write('/sbin/system-hardening -q &> /dev/null')
+			f.write('/sbin/system-hardening -q &> /dev/null\n')
 			f.close()
 			# Package Selection
 			f = open('/tmp/hardening-packages','w')
@@ -988,7 +988,7 @@ class Display_Menu:
 			# Post Configuration
 			f = open('/tmp/hardening-post','w')
 			# Run Hardening Script
-			f.write('/sbin/system-hardening -q &> /dev/null')
+			f.write('/sbin/system-hardening -q &> /dev/null\n')
 			f.close()
 			# Package Selection
 			f = open('/tmp/hardening-packages','w')
@@ -1019,7 +1019,7 @@ class Display_Menu:
 			# Post Configuration
 			f = open('/tmp/hardening-post','w')
 			# Run Hardening Script
-			f.write('/sbin/system-hardening -q &> /dev/null')
+			f.write('/sbin/system-hardening -q &> /dev/null\n')
 			f.close()
 			# Package Selection
 			f = open('/tmp/hardening-packages','w')
@@ -1050,7 +1050,7 @@ class Display_Menu:
 			# Post Configuration
 			f = open('/tmp/hardening-post','w')
 			# Run Hardening Script
-			f.write('/sbin/system-hardening -q &> /dev/null')
+			f.write('/sbin/system-hardening -q &> /dev/null\n')
 			f.close()
 			# Package Selection
 			f = open('/tmp/hardening-packages','w')
@@ -1081,7 +1081,7 @@ class Display_Menu:
 			# Post Configuration
 			f = open('/tmp/hardening-post','w')
 			# Run Hardening Script
-			f.write('/sbin/system-hardening -q &> /dev/null')
+			f.write('/sbin/system-hardening -q &> /dev/null\n')
 			f.close()
 			# Package Selection
 			f = open('/tmp/hardening-packages','w')
