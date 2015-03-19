@@ -2,7 +2,7 @@
 # Graphical Kickstart Script
 #
 # This script was written by Frank Caviggia, Red Hat Consulting
-# Last update was 11 October 2014
+# Last update was 19 March 2015
 # This script is NOT SUPPORTED by Red Hat Global Support Services.
 # Please contact Rick Tavares for more information.
 #
@@ -1220,11 +1220,14 @@ class Display_Menu:
 					f.write('bgcolor = "#FFFFFF"\n')
 				f.close()
 
-			# Write Kickstart Configuration
+			# Write Kickstart Configuration (Hostname/Passwords)
 			f = open('/tmp/hardening','w')
 			f.write('network --device eth0 --bootproto dhcp --noipv6 --hostname '+self.hostname.get_text()+'\n')
 			f.write('rootpw --iscrypted '+str(self.password)+'\n')
 			f.write('bootloader --location=mbr --driveorder='+str(self.data["INSTALL_DRIVES"])+' --append="crashkernel=auto rhgb quiet audit=1" --password='+str(self.a)+'\n')
+			f.close()
+			# Write Kickstart Configuration (Hostname/Passwords)
+			f = open('/tmp/partitioning','w')
 			if self.data["IGNORE_DRIVES"] != "":
 				f.write('ignoredisk --drives='+str(self.data["IGNORE_DRIVES"])+'\n')
 			f.write('zerombr\n')
