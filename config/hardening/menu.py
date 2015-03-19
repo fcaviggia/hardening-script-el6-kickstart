@@ -706,8 +706,8 @@ class Display_Menu:
 			f = open('/tmp/hardening-post','w')
 			# Run Hardening Script
 			f.write('/sbin/system-hardening -q &> /dev/null\n')
-			# RHN Satellite requires umask of 022 for installation
-			f.write('sed -i "/umask/ c\umask 022" /etc/profile\n')
+			# RHN Satellite requires umask of 022 for installation only for root
+			f.write('sed -i ":a;N;$!ba;s/077/022/2" /etc/profile\n')
 			f.close()
 			# Package Selection
 			f = open('/tmp/hardening-packages','w')
@@ -794,8 +794,8 @@ class Display_Menu:
 			f = open('/tmp/hardening-post','w')
 			# Run Hardening Script
 			f.write('/sbin/system-hardening -q &> /dev/null\n')
-			# RHN Satellite requires umask of 022 for installation
-			f.write('sed -i "/umask/ c\umask 022" /etc/profile\n')
+			# RHN Satellite requires umask of 022 for installation only for root
+			f.write('sed -i ":a;N;$!ba;s/077/022/2" /etc/profile\n')
 			f.close()
 			# Package Selection
 			f = open('/tmp/hardening-packages','w')
@@ -826,8 +826,8 @@ class Display_Menu:
 			f = open('/tmp/hardening-post','w')
 			# Run Hardening Script
 			f.write('/sbin/system-hardening -q &> /dev/null\n')
-			# RHN Satellite requires umask of 022 for installation
-			f.write('sed -i "/umask/ c\umask 022" /etc/profile\n')
+			# RHN Satellite requires umask of 022 for installation only for root
+			f.write('sed -i ":a;N;$!ba;s/077/022/2" /etc/profile\n')
 			f.close()
 			# Package Selection
 			f = open('/tmp/hardening-packages','w')
