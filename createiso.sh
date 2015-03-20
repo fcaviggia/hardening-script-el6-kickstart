@@ -3,7 +3,7 @@
 # HARDENED RHEL DVD CREATOR
 #
 # This script was written by Frank Caviggia, Red Hat Consulting
-# Last update was 14 October 2014
+# Last update was 20 March 2015
 # This script is NOT SUPPORTED by Red Hat Global Support Services.
 # Please contact Josh Waldman for more information.
 #
@@ -56,6 +56,17 @@ if [[ $EUID -ne 0 ]]; then
 		tput setaf 1;echo -e "\033[1mPlease re-run this script as root!\033[0m";tput sgr0
 	fi
 	exit 1
+fi
+
+# Check for required packages
+`rpm -q genisoimage`
+if [ $? -ne 0 ]; then
+	yum install -y genisoimage
+fi
+
+`rpm -q isomd5sum`
+if [ $? -ne 0 ]; then
+	yum install -y isomd5sum`
 fi
 
 # Determine if DVD is Bootable
