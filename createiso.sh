@@ -59,14 +59,14 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 # Check for required packages
-`rpm -q genisoimage`
+rpm -q genisoimage &> /dev/null
 if [ $? -ne 0 ]; then
 	yum install -y genisoimage
 fi
 
-`rpm -q isomd5sum`
+rpm -q isomd5sum &> /dev/null
 if [ $? -ne 0 ]; then
-	yum install -y isomd5sum`
+	yum install -y isomd5sum
 fi
 
 # Determine if DVD is Bootable
