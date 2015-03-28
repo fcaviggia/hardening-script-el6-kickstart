@@ -2,7 +2,7 @@
 # Graphical Kickstart Script
 #
 # This script was written by Frank Caviggia, Red Hat Consulting
-# Last update was 11 October 2014
+# Last update was 19 March 2015
 # This script is NOT SUPPORTED by Red Hat Global Support Services.
 # Please contact Rick Tavares for more information.
 #
@@ -399,7 +399,7 @@ class Display_Menu:
 		# Post Configuration
 		f = open('/tmp/hardening-post','w')
 		# Run Hardening Script
-		f.write('/sbin/system-hardening -q &> /dev/null')
+		f.write('/sbin/system-hardening -q &> /dev/null\n')
 		f.close()
 		# Package Selection
 		f = open('/tmp/hardening-packages','w')
@@ -457,7 +457,7 @@ class Display_Menu:
 			# Post Configuration
 			f = open('/tmp/hardening-post','w')
 			# Run Hardening Script
-			f.write('/sbin/system-hardening -q &> /dev/null')
+			f.write('/sbin/system-hardening -q &> /dev/null\n')
 			f.close()
 			# Package Selection
 			f = open('/tmp/hardening-packages','w')
@@ -488,7 +488,7 @@ class Display_Menu:
 			# Post Configuration
 			f = open('/tmp/hardening-post','w')
 			# Run Hardening Script
-			f.write('/sbin/system-hardening -q &> /dev/null')
+			f.write('/sbin/system-hardening -q &> /dev/null\n')
 			f.close()
 			# Package Selection
 			f = open('/tmp/hardening-packages','w')
@@ -583,7 +583,7 @@ class Display_Menu:
 			# Post Configuration
 			f = open('/tmp/hardening-post','w')
 			# Run Hardening Script
-			f.write('/sbin/system-hardening -q &> /dev/null')
+			f.write('/sbin/system-hardening -q &> /dev/null \n')
 			f.close()
 			# Package Selection
 			f = open('/tmp/hardening-packages','w')
@@ -705,9 +705,9 @@ class Display_Menu:
 			# Post Configuration
 			f = open('/tmp/hardening-post','w')
 			# Run Hardening Script
-			f.write('/sbin/system-hardening -q &> /dev/null')
-			# RHN Satellite requires umask of 022 for installation
-			f.write('sed -i "/umask/ c\umask 022" /etc/profile\n')
+			f.write('/sbin/system-hardening -q &> /dev/null\n')
+			# RHN Satellite requires umask of 022 for installation only for root
+			f.write('sed -i \':a;N;$!ba;s/077/022/2\' /etc/profile\n')
 			f.close()
 			# Package Selection
 			f = open('/tmp/hardening-packages','w')
@@ -739,7 +739,7 @@ class Display_Menu:
 			# Post Configuration
 			f = open('/tmp/hardening-post','w')
 			# Run Hardening Script
-			f.write('/sbin/system-hardening -q &> /dev/null')
+			f.write('/sbin/system-hardening -q &> /dev/null \n')
 			f.close()
 			# Package Selection
 			f = open('/tmp/hardening-packages','w')
@@ -793,9 +793,9 @@ class Display_Menu:
 			# Post Configuration
 			f = open('/tmp/hardening-post','w')
 			# Run Hardening Script
-			f.write('/sbin/system-hardening -q &> /dev/null')
-			# RHN Satellite requires umask of 022 for installation
-			f.write('sed -i "/umask/ c\umask 022" /etc/profile\n')
+			f.write('/sbin/system-hardening -q &> /dev/null\n')
+			# RHN Satellite requires umask of 022 for installation only for root
+			f.write('sed -i \':a;N;$!ba;s/077/022/2\' /etc/profile\n')
 			f.close()
 			# Package Selection
 			f = open('/tmp/hardening-packages','w')
@@ -825,13 +825,15 @@ class Display_Menu:
 			# Post Configuration
 			f = open('/tmp/hardening-post','w')
 			# Run Hardening Script
-			f.write('/sbin/system-hardening -q &> /dev/null')
-			# RHN Satellite requires umask of 022 for installation
-			f.write('sed -i "/umask/ c\umask 022" /etc/profile\n')
+			f.write('/sbin/system-hardening -q &> /dev/null\n')
+			# RHN Satellite requires umask of 022 for installation only for root
+			f.write('sed -i \':a;N;$!ba;s/077/022/2\' /etc/profile\n')
 			f.close()
 			# Package Selection
 			f = open('/tmp/hardening-packages','w')
-			f.write('')
+			f.write('libyaml\n')
+			f.write('tomcat6\n')
+			f.write('java-1.6.0-openjdk\n')
 			f.close()
 			
 			
@@ -859,7 +861,7 @@ class Display_Menu:
 			# Post Configuration
 			f = open('/tmp/hardening-post','w')
 			# Run Hardening Script
-			f.write('/sbin/system-hardening -q &> /dev/null')
+			f.write('/sbin/system-hardening -q &> /dev/null\n')
 			f.close()
 			# Package Selection
 			f = open('/tmp/hardening-packages','w')
@@ -948,7 +950,7 @@ class Display_Menu:
 			# Post Configuration
 			f = open('/tmp/hardening-post','w')
 			# Run Hardening Script
-			f.write('/sbin/system-hardening -q &> /dev/null')
+			f.write('/sbin/system-hardening -q &> /dev/null\n')
 			f.close()
 			# Package Selection
 			f = open('/tmp/hardening-packages','w')
@@ -988,7 +990,7 @@ class Display_Menu:
 			# Post Configuration
 			f = open('/tmp/hardening-post','w')
 			# Run Hardening Script
-			f.write('/sbin/system-hardening -q &> /dev/null')
+			f.write('/sbin/system-hardening -q &> /dev/null\n')
 			f.close()
 			# Package Selection
 			f = open('/tmp/hardening-packages','w')
@@ -1019,7 +1021,7 @@ class Display_Menu:
 			# Post Configuration
 			f = open('/tmp/hardening-post','w')
 			# Run Hardening Script
-			f.write('/sbin/system-hardening -q &> /dev/null')
+			f.write('/sbin/system-hardening -q &> /dev/null\n')
 			f.close()
 			# Package Selection
 			f = open('/tmp/hardening-packages','w')
@@ -1050,7 +1052,7 @@ class Display_Menu:
 			# Post Configuration
 			f = open('/tmp/hardening-post','w')
 			# Run Hardening Script
-			f.write('/sbin/system-hardening -q &> /dev/null')
+			f.write('/sbin/system-hardening -q &> /dev/null\n')
 			f.close()
 			# Package Selection
 			f = open('/tmp/hardening-packages','w')
@@ -1081,7 +1083,7 @@ class Display_Menu:
 			# Post Configuration
 			f = open('/tmp/hardening-post','w')
 			# Run Hardening Script
-			f.write('/sbin/system-hardening -q &> /dev/null')
+			f.write('/sbin/system-hardening -q &> /dev/null\n')
 			f.close()
 			# Package Selection
 			f = open('/tmp/hardening-packages','w')
@@ -1218,11 +1220,14 @@ class Display_Menu:
 					f.write('bgcolor = "#FFFFFF"\n')
 				f.close()
 
-			# Write Kickstart Configuration
+			# Write Kickstart Configuration (Hostname/Passwords)
 			f = open('/tmp/hardening','w')
 			f.write('network --device eth0 --bootproto dhcp --noipv6 --hostname '+self.hostname.get_text()+'\n')
 			f.write('rootpw --iscrypted '+str(self.password)+'\n')
 			f.write('bootloader --location=mbr --driveorder='+str(self.data["INSTALL_DRIVES"])+' --append="crashkernel=auto rhgb quiet audit=1" --password='+str(self.a)+'\n')
+			f.close()
+			# Write Kickstart Configuration (Hostname/Passwords)
+			f = open('/tmp/partitioning','w')
 			if self.data["IGNORE_DRIVES"] != "":
 				f.write('ignoredisk --drives='+str(self.data["IGNORE_DRIVES"])+'\n')
 			f.write('zerombr\n')
