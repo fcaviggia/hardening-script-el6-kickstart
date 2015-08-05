@@ -2,7 +2,7 @@
 # HARDENED DVD CREATOR
 #
 # This script was written by Frank Caviggia, Red Hat Consulting
-# Last update was 2 March 2015
+# Last update was 5 August 2015
 # This script is NOT SUPPORTED by Red Hat Global Support Services.
 # Please contact Rick Tavares for more information.
 #
@@ -82,10 +82,28 @@ createiso.sh - installation script to modify RHEL 6.4+ ISO image
 
 		scap-security-guide-*.el6.noarch.rpm
 
-			WILL BE REMOVED WITH RHEL 6.6 (SSG will be part of baseline)
-			
 			Currently I use ths SSG Scripts to take a benchmark to save in
-			root after installation.
+			root after installation. Updated to the latest version.
+
+		rhevm-preinstall.sh
+		rhevm-postinstall.sh
+
+			Scripts to losen settings temporararily to allow registration
+			of the system with RHEV-M by allowing root login and allowing
+			exec in /tmp. Run rhevm-postinstall.sh after system is added
+			into RHEV-M. Copied to /root after kickstart install.
+
+		iptables.sh
+
+			Configures firewall settings to reccomended ports for each 
+			product or profile. Copied to /root after kickstart
+			install.
+
+		ipa-pam-configuration.sh
+
+			Configures system for using IPA/IdM authentication by
+			overwriting the pam.d configurations. Copied to /root
+			after kickstart installation/
 
 
 EXAMPLE
